@@ -1,0 +1,30 @@
+<launch>
+   <rosparam file="$(find roboticarm)/config/arm_control.yaml" command="load"/>
+  <include
+    file="$(find gazebo_ros)/launch/empty_world.launch" />
+  <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 base_link base_footprint 40" />
+  <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-file $(find roboticarm)/urdf/robotic_arm.urdf -urdf -model roboticarm"
+    output="screen" />
+  <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+
+  <node 
+    name="controller_spawner" 
+    pkg="controller_manager" 
+    type="spawner" 
+    respawn="false"
+    output="screen" 
+    ns="/rrbot" 
+    args="joint1_position_controller joint2_position_controller joint_state_controller"/>
+</launch>
