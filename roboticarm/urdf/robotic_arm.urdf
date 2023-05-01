@@ -312,7 +312,7 @@
   <!-- gazebo related stuffs -->
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/joint_controller</robotNamespace>
+      <robotNamespace>/roboticarm</robotNamespace>
     </plugin>
   </gazebo>
 
