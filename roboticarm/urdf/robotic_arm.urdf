@@ -196,7 +196,7 @@
 	<parent link="gripper_link_2" />
 	<child link="gripper_link_3" />
 	<axis xyz="0 0 1"/>
-	<limit lower="0" upper="0.2" effort="100" velocity="1" />
+	<limit lower="-1.57" upper="1.57" effort="100" velocity="1" />
 	</joint>
 
 	<joint name="joint6" type="revolute">
@@ -204,7 +204,7 @@
 	<parent link="gripper_link_1" />
 	<child link="gripper_link_2" />
 	<axis xyz="0 0 1"/>
-	<limit lower="0" upper="0.2" effort="100" velocity="1" />
+	<limit lower="-1.57" upper="1.57" effort="100" velocity="1" />
 	</joint>
 
 	<link name="gripper_link_2_2">
@@ -258,7 +258,7 @@
 	<parent link="gripper_link_2_2" />
 	<child link="gripper_link_4" />
 	<axis xyz="0 0 1"/>
-	<limit lower="-0.2" upper="0" effort="100" velocity="1" />
+	<limit lower="-1.57" upper="1.57" effort="100" velocity="1" />
 	</joint>
 
 	<joint name="joint7" type="revolute">
@@ -266,7 +266,7 @@
 	<parent link="gripper_link_1" />
 	<child link="gripper_link_2_2" />
 	<axis xyz="0 0 1"/>
-	<limit lower="-0.2" upper="0" effort="100" velocity="1" />
+	<limit lower="-1.57" upper="1.57" effort="100" velocity="1" />
 	</joint>
 
 	<joint name="joint5" type="revolute">
