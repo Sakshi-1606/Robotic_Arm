@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<robot name="roboticarm" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/joint_controller</robotNamespace>
+        </plugin>
+    </gazebo>
+
+</robot>

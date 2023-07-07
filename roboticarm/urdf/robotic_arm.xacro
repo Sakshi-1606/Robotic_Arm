@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<robot name="roboticarm">
+<robot name="roboticarm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find roboticarm)/urdf/robotic_arm.trans" />
+<xacro:include filename="$(find roboticarm)/gazebo/robotic_arm_plugin.gazebo" />
+
 	<link name="base_link">
 		<visual>
 			<origin xyz="0 -3.061616997868383172e-18 0" rpy="0 -0 0" />
@@ -23,10 +27,10 @@
 		</inertial>
 	</link>
 
-	<link name="base_footprint"/>
+	<link name="world"/>
 
   	<joint name="base_joint" type="fixed">
-    	<parent link="base_footprint"/>
+    	<parent link="world"/>
     	<child link="base_link"/>
   	</joint>
 
@@ -170,24 +174,24 @@
 
 	<link name="gripper_link_3">
 		<visual>
-		<origin xyz="0.030000000000000026645 -0.0030000000000000026645 -0.013500000000000003317" rpy="2.7895758333200453872e-17 -1.9176045572885558621e-19 5.9914972313653386157e-19" />
-		<geometry>
-		<mesh filename="package://roboticarm/meshes/gripper_link_3.stl"/>
-		</geometry>
-		<material name="gripper_link_3_material">
-		<color rgba="0 0 0 1.0"/>
-		</material>
+			<origin xyz="0.030000000000000026645 -0.0030000000000000026645 -0.013500000000000003317" rpy="2.7895758333200453872e-17 -1.9176045572885558621e-19 5.9914972313653386157e-19" />
+			<geometry>
+				<mesh filename="package://roboticarm/meshes/gripper_link_3.stl"/>
+			</geometry>
+			<material name="gripper_link_3_material">
+				<color rgba="0 0 0 1.0"/>
+			</material>
 		</visual>
 		<collision>
-		<origin xyz="0.030000000000000026645 -0.0030000000000000026645 -0.013500000000000003317" rpy="2.7895758333200453872e-17 -1.9176045572885558621e-19 5.9914972313653386157e-19" />
-		<geometry>
-		<mesh filename="package://roboticarm/meshes/gripper_link_3.stl"/>
-		</geometry>
+			<origin xyz="0.030000000000000026645 -0.0030000000000000026645 -0.013500000000000003317" rpy="2.7895758333200453872e-17 -1.9176045572885558621e-19 5.9914972313653386157e-19" />
+			<geometry>
+				<mesh filename="package://roboticarm/meshes/gripper_link_3.stl"/>
+			</geometry>
 		</collision>
 		<inertial>
-		<origin xyz="0.047860279909926396746 -0.001816675545418268943 -0.0023582232389542500534" rpy="0 0 0"/>
-		<mass value="0.022194922914096641003" />
-		<inertia ixx="1.4659648868937333891e-06" ixy="1.0083147605711552851e-06"  ixz="-1.0394543711540078819e-06" iyy="1.4282656004211426759e-05" iyz="7.2086988985399456882e-08" izz="1.352743129292048836e-05" />
+			<origin xyz="0.047860279909926396746 -0.001816675545418268943 -0.0023582232389542500534" rpy="0 0 0"/>
+			<mass value="0.022194922914096641003" />
+			<inertia ixx="1.4659648868937333891e-06" ixy="1.0083147605711552851e-06"  ixz="-1.0394543711540078819e-06" iyy="1.4282656004211426759e-05" iyz="7.2086988985399456882e-08" izz="1.352743129292048836e-05" />
 		</inertial>
 	</link>
 
@@ -308,101 +312,4 @@
 		<axis xyz="0 0 1"/>
 		<limit lower="-3.14" upper="3.14" effort="100" velocity="1" />
 	</joint>
-
-	<!-- gazebo related stuffs -->
-	<gazebo>
-		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-			<robotNamespace>/roboticarm</robotNamespace>
-		</plugin>
-	</gazebo>
-
-	<transmission name="trans_1">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="joint1">
-			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor_1">
-			<mechanicalReduction>10</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-	<transmission name="trans_2">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="joint2">
-			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor_2">
-			<mechanicalReduction>10</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-	<transmission name="trans_3">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="joint3">
-			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor_3">
-			<mechanicalReduction>10</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-	<transmission name="trans_4">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="joint4">
-			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor_4">
-			<mechanicalReduction>10</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-	<transmission name="trans_5">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="joint5">
-			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor_5">
-			<mechanicalReduction>10</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-	<transmission name="trans_6">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="joint6">
-			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor_6">
-			<mechanicalReduction>10</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-	<transmission name="trans_7">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="joint7">
-			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor_7">
-			<mechanicalReduction>10</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-	<transmission name="trans_8">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="joint8">
-			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor_8">
-			<mechanicalReduction>10</mechanicalReduction>
-		</actuator>
-	</transmission>
-
-	<transmission name="trans_9">
-		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="joint9">
-			<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-		</joint>
-		<actuator name="motor_9">
-			<mechanicalReduction>10</mechanicalReduction>
-		</actuator>
-	</transmission>
 </robot>

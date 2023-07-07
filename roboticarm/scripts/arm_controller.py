@@ -30,10 +30,10 @@ class SliderController:
 class ClawController:
     def __init__(self, master, name, open_value, close_value):
         # Create a publisher to publish the claw value to the joint controller
-        self.pub1 = rospy.Publisher('/roboticarm/joint6_position_controller/command', Float64, queue_size=10)
-        self.pub2 = rospy.Publisher('/roboticarm/joint7_position_controller/command', Float64, queue_size=10)
-        self.pub3 = rospy.Publisher('/roboticarm/joint8_position_controller/command', Float64, queue_size=10)
-        self.pub4 = rospy.Publisher('/roboticarm/joint9_position_controller/command', Float64, queue_size=10)
+        self.pub1 = rospy.Publisher('/joint_controller/joint6_position_controller/command', Float64, queue_size=10)
+        self.pub2 = rospy.Publisher('/joint_controller/joint7_position_controller/command', Float64, queue_size=10)
+        self.pub3 = rospy.Publisher('/joint_controller/joint8_position_controller/command', Float64, queue_size=10)
+        self.pub4 = rospy.Publisher('/joint_controller/joint9_position_controller/command', Float64, queue_size=10)
 
         # Create an open and close button
         self.open_button = tk.Button(master, text="Open", command=lambda: self.button_callback(open_value))
@@ -54,10 +54,10 @@ class ClawController:
         self.pub4.publish(Float64(value))
 
 
-class RoboticArmController:
+class MasterController:
     def __init__(self):
         # Initialize ROS node
-        rospy.init_node('robotic_arm_controller')
+        rospy.init_node('arm_controller')
 
         # Create a Tkinter GUI window
         self.root = tk.Tk()
@@ -67,11 +67,11 @@ class RoboticArmController:
         self.root.geometry("+50+50")
 
         # Create individual sliders for each joint
-        controller1 = SliderController(self.root, "Controller 1", "/roboticarm/joint1_position_controller/command", -180, 180, "red")
-        controller2 = SliderController(self.root, "Controller 2", "/roboticarm/joint2_position_controller/command", -90, 90, "orange")
-        controller3 = SliderController(self.root, "Controller 3", "/roboticarm/joint3_position_controller/command", -97.4, 97.4, "yellow")
-        controller4 = SliderController(self.root, "Controller 4", "/roboticarm/joint4_position_controller/command", -97.4, 97.4, "green")
-        controller5 = SliderController(self.root, "Controller 5", "/roboticarm/joint5_position_controller/command", -180, 180, "blue")
+        controller1 = SliderController(self.root, "Controller 1", "/joint_controller/joint1_position_controller/command", -180, 180, "red")
+        controller2 = SliderController(self.root, "Controller 2", "/joint_controller/joint2_position_controller/command", -90, 90, "orange")
+        controller3 = SliderController(self.root, "Controller 3", "/joint_controller/joint3_position_controller/command", -97.4, 97.4, "yellow")
+        controller4 = SliderController(self.root, "Controller 4", "/joint_controller/joint4_position_controller/command", -97.4, 97.4, "green")
+        controller5 = SliderController(self.root, "Controller 5", "/joint_controller/joint5_position_controller/command", -180, 180, "blue")
 
         # Create a claw controller
         claw_controller = ClawController(self.root, "Claw Controller", 0.0, -0.785)
@@ -82,5 +82,8 @@ class RoboticArmController:
 
 
 if __name__ == '__main__':
-    controller = RoboticArmController()
-    controller.run()
+    try:
+        controller = MasterController()
+        controller.run()
+    except rospy.ROSInterruptException:
+        pass
