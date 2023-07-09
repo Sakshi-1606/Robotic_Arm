@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="roboticarm" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <xacro:property name="grey_color" value="Gazebo/Grey" />
+    <xacro:property name="yellow_color" value="Gazebo/Yellow" />
+    <xacro:property name="black_color" value="Gazebo/Black" />
+
+    <gazebo reference="base_link">
+        <material>${grey_color}</material>
+    </gazebo>
+
+    <gazebo reference="base_turner">
+        <material>${yellow_color}</material>
+    </gazebo>
+
+    <gazebo reference="arm_link_1">
+        <material>${grey_color}</material>
+    </gazebo>
+
+    <gazebo reference="arm_link_2">
+        <material>${grey_color}</material>
+    </gazebo>
+
+    <gazebo reference="arm_link_3">
+        <material>${grey_color}</material>
+    </gazebo>
+
+    <gazebo reference="gripper_link_1">
+        <material>${yellow_color}</material>
+    </gazebo>
+
+    <gazebo reference="gripper_link_2">
+        <material>${grey_color}</material>
+    </gazebo>
+
+    <gazebo reference="gripper_link_4">
+        <material>${grey_color}</material>
+    </gazebo>
+
+    <gazebo reference="gripper_link_3">
+        <material>${black_color}</material>
+    </gazebo>
+
+    <gazebo reference="gripper_link_5">
+        <material>${black_color}</material>
+    </gazebo>
+
+</robot>

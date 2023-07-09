@@ -3,6 +3,7 @@
 
 <xacro:include filename="$(find roboticarm)/urdf/robotic_arm.trans" />
 <xacro:include filename="$(find roboticarm)/gazebo/robotic_arm_plugin.gazebo" />
+<xacro:include filename="$(find roboticarm)/gazebo/robotic_arm_material.gazebo" />
 
 	<link name="base_link">
 		<visual>
@@ -211,7 +212,7 @@
 		<limit lower="-1.57" upper="1.57" effort="100" velocity="1" />
 	</joint>
 
-	<link name="gripper_link_2_2">
+	<link name="gripper_link_4">
 		<visual>
 			<origin xyz="-0.020000000000000003886 0 -0.01249999999999999549" rpy="-1.8231828477160622874e-19 4.5024695016245069465e-17 -3.467885654086683229e-20" />
 			<geometry>
@@ -234,13 +235,13 @@
 		</inertial>
 	</link>
 
-	<link name="gripper_link_4">
+	<link name="gripper_link_5">
 		<visual>
 			<origin xyz="0.030000000000000026645 0.0030000000000000026645 -0.00099999999999999915345" rpy="-3.141592653589793116 -3.5474759767231887989e-19 1.5061988724684013876e-19" />
 			<geometry>
 				<mesh filename="package://roboticarm/meshes/gripper_link_4.stl"/>
 			</geometry>
-			<material name="gripper_link_4_material">
+			<material name="gripper_link_5_material">
 				<color rgba="0 0 0 1.0"/>
 			</material>
 		</visual>
@@ -259,8 +260,8 @@
 
 	<joint name="joint9" type="revolute">
 		<origin xyz="-0.040000000000000000833 -1.1102230246251565404e-16 1.8865117801247777152e-17" rpy="-3.1415926535897926719 1.2875113902521724409e-15 1.57079632679489678" />
-		<parent link="gripper_link_2_2" />
-		<child link="gripper_link_4" />
+		<parent link="gripper_link_4" />
+		<child link="gripper_link_5" />
 		<axis xyz="0 0 1"/>
 		<limit lower="-1.57" upper="1.57" effort="100" velocity="1" />
 	</joint>
@@ -268,7 +269,7 @@
 	<joint name="joint7" type="revolute">
 		<origin xyz="0.015000000000000004649 0.00099999999999999698505 -0.020000000000000017764" rpy="-1.570796326794896558 2.9211766417202967469e-14 3.1415926535897877869" />
 		<parent link="gripper_link_1" />
-		<child link="gripper_link_2_2" />
+		<child link="gripper_link_4" />
 		<axis xyz="0 0 1"/>
 		<limit lower="-1.57" upper="1.57" effort="100" velocity="1" />
 	</joint>
