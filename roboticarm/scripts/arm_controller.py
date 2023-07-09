@@ -11,13 +11,17 @@ class SliderController:
         # Create a publisher to publish the slider value to the joint controller
         self.pub = rospy.Publisher(topic, Float64, queue_size=10)
 
-        # Create a horizontal slider
-        self.slider = tk.Scale(master, from_=min_value, to=max_value, orient=tk.HORIZONTAL, length=300, width=20, sliderlength=10, bg=color, command=self.slider_callback)
-        self.slider.pack(pady=5)
-
         # Create a label with the controller name
         self.label = tk.Label(master, text=name)
         self.label.pack()
+
+        # Create a horizontal slider
+        self.slider = tk.Scale(master, from_=min_value, to=max_value, orient=tk.HORIZONTAL, length=300, width=20, sliderlength=10, bg=color, fg="snow", command=self.slider_callback)
+        self.slider.pack()
+
+        # Create a small space between the slider and next label
+        self.space = tk.Label(master, text=" ")
+        self.space.pack()
 
     def slider_callback(self, value):
         # Convert the slider value to radians
@@ -35,16 +39,16 @@ class ClawController:
         self.pub3 = rospy.Publisher('/joint_controller/joint8_position_controller/command', Float64, queue_size=10)
         self.pub4 = rospy.Publisher('/joint_controller/joint9_position_controller/command', Float64, queue_size=10)
 
-        # Create an open and close button
-        self.open_button = tk.Button(master, text="Open", command=lambda: self.button_callback(open_value))
-        self.open_button.pack(padx=5)
-
-        self.close_button = tk.Button(master, text="Close", command=lambda: self.button_callback(close_value))
-        self.close_button.pack(padx=5)
-
         # Create a label with the controller name
         self.label = tk.Label(master, text=name)
         self.label.pack()
+
+        # Create an open and close button
+        self.open_button = tk.Button(master, text="Open", command=lambda: self.button_callback(open_value), bg="green", fg="white")
+        self.open_button.pack(side="left", fill="x", expand=True)
+
+        self.close_button = tk.Button(master, text="Close", command=lambda: self.button_callback(close_value), bg="red", fg="white")
+        self.close_button.pack(side="left", fill="x", expand=True)
 
     def button_callback(self, value):
         # Publish the claw value to the joint controller
@@ -67,11 +71,11 @@ class MasterController:
         self.root.geometry("+50+50")
 
         # Create individual sliders for each joint
-        controller1 = SliderController(self.root, "Controller 1", "/joint_controller/joint1_position_controller/command", -180, 180, "red")
-        controller2 = SliderController(self.root, "Controller 2", "/joint_controller/joint2_position_controller/command", -90, 90, "orange")
-        controller3 = SliderController(self.root, "Controller 3", "/joint_controller/joint3_position_controller/command", -97.4, 97.4, "yellow")
-        controller4 = SliderController(self.root, "Controller 4", "/joint_controller/joint4_position_controller/command", -97.4, 97.4, "green")
-        controller5 = SliderController(self.root, "Controller 5", "/joint_controller/joint5_position_controller/command", -180, 180, "blue")
+        controller1 = SliderController(self.root, "Controller 1", "/joint_controller/joint1_position_controller/command", -180, 180, "blue4")
+        controller2 = SliderController(self.root, "Controller 2", "/joint_controller/joint2_position_controller/command", -90, 90, "blue4")
+        controller3 = SliderController(self.root, "Controller 3", "/joint_controller/joint3_position_controller/command", -97.4, 97.4, "blue4")
+        controller4 = SliderController(self.root, "Controller 4", "/joint_controller/joint4_position_controller/command", -97.4, 97.4, "blue4")
+        controller5 = SliderController(self.root, "Controller 5", "/joint_controller/joint5_position_controller/command", -180, 180, "blue4")
 
         # Create a claw controller
         claw_controller = ClawController(self.root, "Claw Controller", 0.0, -0.785)
