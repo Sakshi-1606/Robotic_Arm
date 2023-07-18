@@ -10,7 +10,7 @@ A ROS package to simulate a simple 5 DOF robotic arm in gazebo and also to contr
 
 ![Robot Model](assets/model.png)
 
-*Robotic Arm Model*
+*Robotic Arm Model *
 
 ## Technologies Used
 
